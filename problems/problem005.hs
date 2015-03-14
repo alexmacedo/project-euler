@@ -10,6 +10,14 @@
 
 module Main where
 
-main :: IO ()
+isDivisible :: (Integral a) => a -> Bool
+isDivisible n = sum ([n `mod` x | x <- [2..20]]) == 0
 
+stopWhen :: (a -> Bool) -> [a] -> a
+stopWhen pred (x:xs)
+    | pred x    = x
+    | otherwise = stopWhen pred xs
+
+main :: IO ()
+main = print (stopWhen (isDivisible) [20,40..])
 
