@@ -12,6 +12,12 @@
 
 module Main where
 
-main :: IO ()
+sumOfSquares :: (Integral a) => a -> a
+sumOfSquares n = sum (map (^2) [1..n])
 
+squareOfSum :: (Integral a) => a -> a
+squareOfSum n = (sum [1..n])^2
+
+main :: IO ()
+main = print ((squareOfSum 100) - (sumOfSquares 100))
 
