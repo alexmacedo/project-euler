@@ -10,6 +10,19 @@
 
 module Main where
 
-main :: IO ()
+isPrime :: (Integral a) => a -> [a] -> Bool
+isPrime _ [] = True
+isPrime n (x:xs)
+    | n `mod` x /= 0 = isPrime n xs
+    | otherwise      = False
 
+allPrimes :: (Integral a) => [a] -> [a]
+allPrimes [] = []
+allPrimes (x:xs)
+    | length xs > 10000  = xs
+    | isPrime x xs       = allPrimes $ (x + 2):x:xs
+    | otherwise          = allPrimes $ (x + 2):xs
+
+main = do
+    print $ head $ allPrimes [13,11,7,5,3,2]
 
