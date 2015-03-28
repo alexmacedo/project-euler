@@ -22,21 +22,20 @@ nextTripletOf1000 :: (Ord a, Num a) => (a, a, a) -> (a, a, a)
 nextTripletOf1000 = nextTriplet 1000
 
 
-isPythagorean :: (Num a) => (a, a, a) -> Bool
-isPythagorean (a,b,c) = a^2 + b^2 = c^2
+isPythagorean :: (Num a, Eq a) => (a, a, a) -> Bool
+isPythagorean (a,b,c) = a^2 + b^2 == c^2
 
 
-tripleProduct (Num a) => (a, a, a) -> a
+tripleProduct :: (Num a) => (a, a, a) -> a
 tripleProduct (a, b, c) = a * b * c
 
 
--- findTriplet :: (Num a) => (b -> Bool) -> (a, a, a)
+findTriplet :: (t -> Bool) -> t -> (t -> t) -> t
 findTriplet pred triplet getNext
     | pred triplet = triplet
-    | otherwise    = findtriplet pred (getNext triplet) getNext
+    | otherwise    = findTriplet pred (getNext triplet) getNext
 
 
 main = do
-    let triplet = findTriplet isPythagorean (1,2,997) nextTripletOf1000
-    in print $ tripleProduct triplet
+    print (tripleProduct (findTriplet (isPythagorean) (1,2,997) nextTripletOf1000))
 
